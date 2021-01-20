@@ -1,15 +1,22 @@
+/*
+main.go
+@import github.com/KensukeSakakibara/echo_gorm_skeleton
+@author Kensuke Sakakibara
+@since 2021.01.20
+@copyright Copyright (c) 2021 Kensuke Sakakibara
+*/
 package main
 
 import (
-	"net/http"
-
-	"github.com/labstack/echo"
+	"github.com/KensukeSakakibara/echo_gorm_skeleton/registry"
 )
 
 func main() {
-	e := echo.New()
-	e.GET("/", func(c echo.Context) error {
-		return c.String(http.StatusOK, "Hello, World!")
-	})
-	e.Logger.Fatal(e.Start(":1323"))
+	// アプリケーションの初期化
+	initInterface := registry.DiInit()
+	initInterface.Run()
+
+	// アプリ実行
+	routerInterface := registry.DiRouter()
+	routerInterface.Run()
 }
